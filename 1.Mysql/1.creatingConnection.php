@@ -1,13 +1,16 @@
 <?php
    
-   $dbhost = 'localhost:3036';
-   $dbuser = 'admin';
+   $dbhost = 'localhost:3306';
+   $dbuser = 'myadmin';
    $dbpass = '123456';
-   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   //$conn = mysqli_connect($dbhost, $dbuser, $dbpass);
    
+   $conn =  new mysqli('p:'.$dbhost, $dbuser, $dbpass, 't2');
+   
+   var_dump($conn);
    if(! $conn ) {
-      die('Could not connect: ' . mysql_error());
+      die('Could not connect:'.mysqli_connect_error());
    }
    
    echo 'Connected successfully';
-   mysql_close($conn);
+   mysqli_close($conn);

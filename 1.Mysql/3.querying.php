@@ -3,21 +3,21 @@
    $dbhost = 'localhost:3036';
    $dbuser = 'admin';
    $dbpass = '123456';
-   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   $conn =  new mysqli('p:'.$dbhost, $dbuser, $dbpass, 't2');
    
    if(! $conn ) {
-      die('Could not connect: ' . mysql_error());
+      die('Could not connect: ' . mysqli_connect_error());
    }
    
    $sql = 'SELECT emp_id, emp_name, emp_salary FROM employee';
-   mysql_select_db('test_db');
-   $retval = mysql_query( $sql, $conn );
+   mysqli_select_db($conn,'t2');
+   $retval = mysqli_query( $sql, $conn );
    
    if(! $retval ) {
-      die('Could not get data: ' . mysql_error());
+      die('Could not get data: ' . mysqli_connect_error());
    }
    
-   while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
+   while($row = mysqli_fetch_array($retval, MYSQL_ASSOC)) {
       echo "EMP ID :{$row['emp_id']}  <br> ".
          "EMP NAME : {$row['emp_name']} <br> ".
          "EMP SALARY : {$row['emp_salary']} <br> ".
@@ -26,4 +26,4 @@
    
    echo "Fetched data successfully\n";
    
-   mysql_close($conn);
+   mysqli_close($conn);

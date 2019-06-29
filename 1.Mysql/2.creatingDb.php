@@ -3,18 +3,18 @@
 $dbhost = 'localhost:3036';
 $dbuser = 'admin';
 $dbpass = '123456';
-$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+$conn =  new mysqli('p:'.$dbhost, $dbuser, $dbpass, 't2');
 
 if (!$conn) {
-    die('Could not connect: ' . mysql_error());
+    die('Could not connect: ' . mysqli_connect_error());
 }
 
 $sql = 'CREATE Database test_db';
-$retval = mysql_query($sql, $conn);
+$retval = mysqli_query($sql, $conn);
 
 if (!$retval) {
-    die('Could not create database: ' . mysql_error());
+    die('Could not create database: ' . mysqli_connect_error());
 }
 
 echo "Database test_db created successfully\n";
-mysql_close($conn);
+mysqli_close($conn);
